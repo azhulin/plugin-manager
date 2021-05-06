@@ -30,6 +30,10 @@ export default class PluginManager {
      */
     ctor(id: string): Constructor;
     /**
+     * Returns a list of all registered plugin IDs.
+     */
+    list(): string[];
+    /**
      * Determines whether the plugin ID should be registered.
      */
     protected filter(id: string, match?: string | RegExp | (string | RegExp)[]): boolean;

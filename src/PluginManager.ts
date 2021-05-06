@@ -69,6 +69,13 @@ export default class PluginManager {
   }
 
   /**
+   * Returns a list of all registered plugin IDs.
+   */
+  public list(): string[] {
+    return Object.keys(this.info)
+  }
+
+  /**
    * Determines whether the plugin ID should be registered.
    */
   protected filter(id: string, match?: string | RegExp | (string | RegExp)[]): boolean {
