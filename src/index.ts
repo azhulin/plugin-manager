@@ -1,4 +1,4 @@
-import Error from "./error"
+import * as Error from "./error"
 import PluginManager from "./PluginManager"
 
 export { Error, PluginManager }
