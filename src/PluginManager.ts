@@ -30,11 +30,12 @@ export default class PluginManager {
   public register(path: string | string[], dirname: string = "", match?: string | RegExp | (string | RegExp)[]): this {
     [].concat(path).forEach((path: string) => {
       path = resolve(dirname, path)
-      const length = path.length + 1
+      const prefixes = glob.sync(path).map(path => path.replace(/\/+$/, "") + "/")
       glob.sync(`${path}/**/*.js`)
         .map(path => path.replace(/\.js$/, ""))
         .map(path => {
-          const id = path.substring(length).split("/")
+          const prefix = prefixes.find(prefix => path.startsWith(prefix)) ?? ""
+          const id = path.substring(prefix.length).split("/")
             .map(value => this.snakecase(value)).join(".")
           this.filter(id, match) && (this.info[id] = { path })
         })
